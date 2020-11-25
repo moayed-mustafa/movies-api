@@ -1,4 +1,3 @@
-//  This is the main app
 
 const express = require('express');
 const app = express()
@@ -6,6 +5,7 @@ const cors = require('cors');
 app.use(express.json())
 app.use(cors())
 const MoviesApi = require('./API')
+const MovieModel = require('./model.js')
 const ExpressError = require('./expressError')
 
 
@@ -37,8 +37,29 @@ app.get('/movie/:id', async (req,res, next) => {
 
 })
 
-/** 404 handler */
+/** POST vote a movie up*/
+app.post('/movie/up', async (req,res, next) => {
+    try {
+        const { title, user_vote } = req.body
+         await MovieModel.vote(user_vote,"up",title)
+        return res.send({message:"vote added"})
+    } catch (e) {
+        return next(new ExpressError("Something went wrong", 404))
+    }
+})
 
+/** POST vote a movie down*/
+app.post('/movie/down', async (req,res, next) => {
+    try {
+        const { title, user_vote } = req.body
+         await MovieModel.vote(user_vote,"down",title)
+        return res.send({message:"vote added"})
+    } catch (e) {
+        return next(new ExpressError("Something went wrong", 404))
+    }
+})
+
+/** 404 handler */
 app.use((req, res, next)=> {
     const err = new ExpressError("Not Found", 404);
     return next(err);
