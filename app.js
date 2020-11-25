@@ -40,8 +40,9 @@ app.get('/movie/:id', async (req,res, next) => {
 /** POST vote a movie up*/
 app.post('/movie/up', async (req,res, next) => {
     try {
-        const { title, user_vote } = req.body
-         await MovieModel.vote(user_vote,"up",title)
+        const { title, user_vote, direction } = req.body
+        console.log(title, user_vote, direction)
+         await MovieModel.vote(user_vote,direction,title)
         return res.send({message:"vote added"})
     } catch (e) {
         return next(new ExpressError("Something went wrong", 404))
@@ -51,8 +52,8 @@ app.post('/movie/up', async (req,res, next) => {
 /** POST vote a movie down*/
 app.post('/movie/down', async (req,res, next) => {
     try {
-        const { title, user_vote } = req.body
-         await MovieModel.vote(user_vote,"down",title)
+        const { title, user_vote,direction  } = req.body
+         await MovieModel.vote(user_vote,direction,title)
         return res.send({message:"vote added"})
     } catch (e) {
         return next(new ExpressError("Something went wrong", 404))

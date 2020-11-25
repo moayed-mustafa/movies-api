@@ -7,8 +7,7 @@ class MovieModel{
 
 
         const movieExist = await db.query(`SELECT * FROM movies WHERE title = $1`, [title])
-        console.log(movieExist.rows.length)
-        if (movieExist.rowCount === 0) {
+        if (movieExist.rows.length === 0) {
             if (direction == 'up') {
                 await db.query(
                     `INSERT INTO movies
