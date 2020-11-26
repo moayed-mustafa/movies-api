@@ -41,6 +41,19 @@ class MovieModel{
             }
             }
     }
+
+    static async getVotes(title) {
+        const movieExist = await db.query(`SELECT * FROM movies WHERE title = $1`, [title]);
+        if (movieExist.rows.length === 0) {
+            return {message: "movie does not exist", movieExist: false}
+        }
+        else {
+            const res = await db.query(`SELECT thumbs_up, thumbs_down FROM movies
+            WHERE title = $1`, [title])
+            return {movieExist: true, votes: res.rows[0]}
+        }
+
+    }
 }
 
 module.exports = MovieModel
