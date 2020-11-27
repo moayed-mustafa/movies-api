@@ -10,6 +10,13 @@
 - start the test database using this command in your project root: psql < movies_test.sql
 - then run npm test to see the tests results
 
+# Images:
+- Home page:
+![Alt text](images/homepage.png)
+- Movies List:
+![Alt text](images/moviesList.png)
+- Movie Details:
+![Alt text](images/movieDetails.png)
 
 # Run the frontend part of this project
 - Head to this repo [Movies UI](https://github.com/moayed-mustafa/movies-ui) and follow the instructions over there to run the frontend.
