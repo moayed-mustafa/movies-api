@@ -37,7 +37,7 @@ app.get('/movie/:id', async (req,res, next) => {
 
 })
 
-/** POST vote a movie up*/
+/** POST vote a movie up or down*/
 app.post('/movie/vote', async (req,res, next) => {
     try {
         const { title, user_vote, direction } = req.body
@@ -48,7 +48,7 @@ app.post('/movie/vote', async (req,res, next) => {
     }
 })
 
-/** GET thumbs up and down*/
+/** GET thumbs up and down for a movie*/
 app.get('/movies/:title', async (req,res, next) => {
     try {
         const {title } = req.params
